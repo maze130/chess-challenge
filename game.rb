@@ -29,10 +29,18 @@ class Chess
         View.select_own_pieces(player) if !@board.select_piece(select_key, player)
       end until @board.select_piece(select_key, player)
 
-      p @board.valid_moves(select_key)
       valid_moves = @board.valid_moves(select_key).map { |key| key_coord_convert(key) }
 
+      # makes player loose turn for selecting a piece with no valid moves
+      # if valid_moves.empty?
+      #   puts "Nice try, cheater!"
+      #   game_turn += 1
+      #   break
+      # end
+      break if valid_moves.empty?
+
       View.possible_moves(valid_moves)
+
 
       begin
         View.player_choose_move(player)
@@ -41,7 +49,7 @@ class Chess
 
       @board.move(coord_key_convert(start_coord), coord_key_convert(end_coord))
 
-      View.display(@board.to_s)
+      # View.display(@board.to_s)
 
       game_turn += 1
     end

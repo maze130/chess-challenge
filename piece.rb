@@ -22,7 +22,7 @@ class King < Piece
     down_left = num - 11
     up_right = num + 11
     up_left = num + 9
-    [[up],[down],[right],[left],[down_right],[down_left],[up_right],[up_left]].delete_if {|number| number[0] > 88 || number[0] < 11}
+    [[up],[down],[right],[left],[down_right],[down_left],[up_right],[up_left]].delete_if {|number| number[0] > 88 || number[0] < 11 || number[0] % 10 > 8 || number[0] % 10 < 1}
   end
 
   def to_s
